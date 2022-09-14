@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.js"></script>
+    <style>
+        .box {
+            margin-left: 960px;
+            margin-top: 100px;
+            width: 400px;
+            height: 500px;
+            background-color: aqua;
+        }
+
+        .box::before {
+            content: "";
+            display: table;
+        }
+
+        .box > h1 {
+            font-size: 40px;
+            margin-top: 100px;
+            margin-left: 138px;
+        }
+
+        .box > input {
+            outline: none;
+            margin-left: 73px;
+            margin-top: 40px;
+            font-size: 24px;
+            width: 250px;
+            border: 0px;
+            border-bottom: solid 3px black;
+            background: none;
+        }
+
+        .register {
+            border: 0px;
+            background: none;
+            color: red;
+            font-size: 14px;
+            margin-top: 12px;
+            margin-left: 68px;
+        }
+
+        .login {
+            width: 250px;
+            font-size: 20px;
+            line-height: 40px;
+            margin-top: 30px;
+            margin-left: 73px;
+            border: 0px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<div id="app">
+    <div class="box">
+        <h1>Login</h1>
+        <input type="text" name="username" placeholder="username" v-model="username"><br>
+        <input type="password" name="password" placeholder="password" v-model="password"><br>
+        <button class="register">Don't have account? Sign up</button>
+        <button class="login" v-on:click = 'login'>login</button>
+    </div>
+</div>
+<body>
+
+<script>
+    import {axios} from "./js/axios";
+
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            username: '',
+            password: ''
+        },
+        methods:{
+            login : function (){
+                axios({
+                    method: 'post',
+                    url: 'http://localhost/user',
+                    data: {
+                        username: this.data.username,
+                        password: this.data.password
+                    }
+                });
+            }
+        }
+
+    })
+</script>
+</body>
+</html>
